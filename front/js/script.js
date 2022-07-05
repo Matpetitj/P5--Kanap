@@ -21,9 +21,8 @@ fetch("http://localhost:3000/api/products")
 function produits(index) {
   // lié une variable à la classe pour se placer
   let zoneArticle = document.querySelector("#items");
-  // bouche avec indice "article"
+  // boucle avec indice "article"
   for (let article of index) {
-    
     zoneArticle.innerHTML += `<a href="./product.html?_id=${article._id}">
     <article>
       <img src="${article.imageUrl}" alt="${article.altTxt}">
