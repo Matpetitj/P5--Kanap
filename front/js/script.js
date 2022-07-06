@@ -23,12 +23,27 @@ function displayProducts(productsCollection) {
   const zoneArticle = document.getElementById("items");
   // boucle avec indice "article"
   for (const product of productsCollection) {
-    zoneArticle.innerHTML += `<a href="./product.html?_id=${product._id}">
-    <article>
-      <img src="${product.imageUrl}" alt="${product.altTxt}">
-      <h3 class="productName">${product.name}</h3>
-      <p class="productDescription">${product.description}</p>
-    </article>
-  </a>`;
+
+    const productLink = document.createElement('a');
+    productLink.setAttribute('href',"./product.html?_id");
+    zoneArticle.appendChild(productLink);
+    
+    const article = document.createElement('article');
+    productLink.appendChild(article);
+
+    const imageProduct = document.createElement('img');
+    imageProduct.setAttribute('src', product.imageUrl);
+    imageProduct.setAttribute('alt', product.altTxt);
+    article.appendChild(imageProduct);
+
+    const h3ProductName = document.createElement('h3');
+    h3ProductName.setAttribute('class',product.Name);
+    article.appendChild(h3ProductName);
+    h3ProductName.textContent = product.name;
+
+    const productDescription = document.createElement('p');
+    productDescription.setAttribute('class',product.Description);
+    article.appendChild(productDescription);
+    productDescription.textContent = product.description;
   }
 }
