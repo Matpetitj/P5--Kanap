@@ -4,11 +4,11 @@ fetch("http://localhost:3000/api/products")
 
 .then((res) => res.json())
   // on nomme ce que l'on recoit "receiveobject"
-  .then((receiveobject) => {
+  .then((listSofa) => {
     // info en console
-    console.table(receiveobject);
+    console.table(listSofa);
     // call function
-    produits(receiveobject);
+    displayProducts(listSofa);
   })
   // Si erreur, renvoie d'un texte erreur 404.
   .catch((err) => {
@@ -18,16 +18,16 @@ fetch("http://localhost:3000/api/products")
 
 // Affichage de l'API sur l'index
 
-function produits(index) {
+function displayProducts(productsCollection) {
   // lié une variable à la classe pour se placer
-  let zoneArticle = document.querySelector("#items");
+  const zoneArticle = document.getElementById("items");
   // boucle avec indice "article"
-  for (let article of index) {
-    zoneArticle.innerHTML += `<a href="./product.html?_id=${article._id}">
+  for (const product of productsCollection) {
+    zoneArticle.innerHTML += `<a href="./product.html?_id=${product._id}">
     <article>
-      <img src="${article.imageUrl}" alt="${article.altTxt}">
-      <h3 class="productName">${article.name}</h3>
-      <p class="productDescription">${article.description}</p>
+      <img src="${product.imageUrl}" alt="${product.altTxt}">
+      <h3 class="productName">${product.name}</h3>
+      <p class="productDescription">${product.description}</p>
     </article>
   </a>`;
   }
