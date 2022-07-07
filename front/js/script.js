@@ -25,7 +25,7 @@ function displayProducts(productsCollection) {
   for (const product of productsCollection) {
 
     const productLink = document.createElement('a');
-    productLink.setAttribute('href',"./product.html?_id");
+    productLink.setAttribute('href',"./product.html?_id=" + product._id);
     zoneArticle.appendChild(productLink);
     
     const article = document.createElement('article');
