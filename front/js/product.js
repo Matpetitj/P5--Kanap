@@ -25,7 +25,7 @@ fetch("http://localhost:3000/api/products")
   //Ajout des informations des produits
 
   function pageProducts(products) {
-    const productImage = document.getElementById("item__img");
+    const zoneImage = document.querySelector("article div.item__img");
     const productTitle = document.getElementById("title");
     const productPrice = document.getElementById("price");
     const productDescription = document.getElementById("description");
@@ -34,7 +34,7 @@ fetch("http://localhost:3000/api/products")
     for (const choice of products) {
         
         const createProductImage = document.createElement('img');
-        productImage.appendChild(createProductImage);
+        zoneImage.appendChild(createProductImage);
 
         if (productId == choice._id) {
 
@@ -49,8 +49,8 @@ fetch("http://localhost:3000/api/products")
 
             productAddToCart.productPrice = choice.price;
 
-            for (const color of choice.colors) {
-                productColor.innerHTML += '<option value=${couleur}>${couleur}</option>';
+            for (const colors of choice.colors) {
+                productColor.innerHTML += `<option value="${colors}">${colors}</option>`;
             }
         }
     }
