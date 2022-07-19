@@ -47,7 +47,7 @@ fetch("http://localhost:3000/api/products")
             productAddToCart.productPrice = choice.price;
 
             for (const colors of choice.colors) {
-                productColor.innerHTML += `<option value="${colors}">${colors}</option>`;
+                productColor.innerHTML += `<option value="${colors}">${colors}</option>`; //utilisation littéraux de gabarits
             }
         }
     }
@@ -59,40 +59,38 @@ fetch("http://localhost:3000/api/products")
 let colorChoice = document.getElementById("colors");
 
   colorChoice.addEventListener("input", (ec) => {
+
   let productColor;
-  
   productColor = ec.target.value;
-
   productAddToCart.color = productColor;
-
   document.getElementById("addToCart").style.color = "white";
   document.getElementById("addToCart").textContent = "Ajouter au panier";
   console.log(productColor);
 });
 
 let quantityChoice = document.querySelector('input[id="quantity"]');
-let quantityProduct;
+let productQuantity;
 // On écoute ce qu'il se passe dans input[name="itemQuantity"]
 quantityChoice.addEventListener("input", (eq) => {
-  quantityProduct = eq.target.value;
-  productAddToCart.quantity = quantityProduct;
+  productQuantity = eq.target.value;
+  productAddToCart.quantity = productQuantity;
   //reset
   document.getElementById("addToCart").style.color = "white";
   document.getElementById("addToCart").textContent = "Ajouter au panier";
-  console.log(quantityProduct);
+  console.log(productQuantity);
 });
 
 let productChoice = document.getElementById("addToCart");
 productChoice.addEventListener("click", () => {
   if (
-   //valeurs dynamiques
+   //valeurs dynamiques (non définies au départ, il faut cliquer et changer la valeur pour accéder à la logique)
     productAddToCart.quantity < 1 ||
     productAddToCart.quantity > 100 ||
     productAddToCart.quantity === undefined ||
     productAddToCart.color === "" ||
     productAddToCart.color === undefined
   ) {
-    alert("Pour valider votre choix, veuillez renseigner une couleur et une quantité valide");
+    alert("Pour valider votre choix, veuillez renseigner une couleur et/ou une quantité valide");
   } else {
     Cart();
     console.log("clic effectué");
