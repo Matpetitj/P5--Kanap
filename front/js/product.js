@@ -96,8 +96,7 @@ productChoice.addEventListener("click", () => {
   } else {
     Cart();
     console.log("clic effectué");
-    //document.getElementById("addToCart").style.color = "rgb(0, 205, 0)";
-    document.getElementById("addToCart").textContent = "Ajouté !";
+    document.getElementById("addToCart").textContent = "Et Hop!";
   }
 });
 // déclaration tableau qui sera le 1er, unique et destiné à initialiser le panier
