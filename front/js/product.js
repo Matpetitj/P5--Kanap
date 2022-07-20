@@ -59,6 +59,10 @@ function addToCart(productId, color, amount) {
   //sauvegarder le panier dans le localStorage
 }
 
+function getCart () {
+
+}
+
 let productChoice = document.getElementById("addToCart");
 productChoice.addEventListener("click", () => {
   let colorChoice = document.getElementById("colors");
