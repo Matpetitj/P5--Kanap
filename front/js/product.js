@@ -49,14 +49,28 @@ fetch("http://localhost:3000/api/products")
   }
 
   //Ajout du produit au panier
-    
 
 function addToCart(productId, color, amount) {
   console.log(productId, color, amount);
   //récupérer le panier
+  const cart = getCart();
+  let productFound = false;
   //vérifier si le produit existe déjà avec l'id et la couleur identiques
+  for (let productIndex = 0; productIndex < cart.lenght; productIndex ++) {
+    const product = cart[productIndex];
+    if (product._id == productId && product.color == color) {
+      productFound = true;
+    }
+  }
   //si il existe, + les deux quantités (avant maintenant)
+  if (productFound = true) {
+
   //sinon, insérer le produit dans le panier
+  } else {
+
+  }
+
+  
   //sauvegarder le panier dans le localStorage
 }
 
@@ -82,23 +96,13 @@ let productChoice = document.getElementById("addToCart");
     addToCart(productId, colorChoice.value, quantityChoice.value);
 });
 
-let addProduct = JSON.parse(localStorage.getItem("product"));
-console.log(addProduct);
-
-const cartDisplay = getCart (); {
-  if (addProduct) {
-  await addProduit;
-  console.log(addProduct);
-  }
-}
 
 function getCart() {
-  let productSave = [];
-  console.log(productSave);
-  if (productSave === null) {
-    productChoice.push(addProduct);
-    console.log(addProduct);
-    return (localStorage.cartStock = JSON.stringify(productChoice));
+  const cart = localStorage.getItem("product");
+  if (cart == null) {
+    return [];
+  } else {
+   return JSON.parse(cart);
   }
 }
 
