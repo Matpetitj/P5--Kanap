@@ -55,29 +55,42 @@ function addToCart(productId, color, amount) {
   //récupérer le panier
   const cart = getCart();
   let productFound = false;
+  let productIndex = 0;
   //vérifier si le produit existe déjà avec l'id et la couleur identiques
-  for (let productIndex = 0; productIndex < cart.lenght; productIndex ++) {
-    const product = cart[productIndex];
+  for (let i = 0; i < cart.lenght; i ++) {
+    const product = cart[i];
     if (product._id == productId && product.color == color) {
       productFound = true;
+      productIndex = i;
     }
   }
   //si il existe, + les deux quantités (avant maintenant)
-  if (productFound = true) {
-
+  if (productFound == true) {
+    cart[productIndex].amount += amount;
   //sinon, insérer le produit dans le panier
-  } else {
-
+  } else { 
+    let newProduct = {
+      _id: productId,
+      color: color,
+      amount: amount,
+    }
+    cart.push(newProduct);
+    console.log(newProduct);
+    console.log("clic effectué");
+    document.getElementById("addToCart").textContent = "Et Hop!";
   }
+  saveCart(cart);
+}
 
-  
-  //sauvegarder le panier dans le localStorage
+//sauvegarder le panier dans le localStorage
+  function saveCart(products) {
+  localStorage.setItem("product",JSON.stringify(products));
 }
 
 let productChoice = document.getElementById("addToCart");
       productChoice.addEventListener("click", () => {
-    let colorChoice = document.getElementById("colors");
-    let quantityChoice = document.getElementById("quantity");
+    let colorChoice = document.getElementById("colors").value;
+    let quantityChoice = document.getElementById("quantity").value;
     if (
     //valeurs dynamiques (non définies au départ, il faut cliquer et changer la valeur pour accéder à la logique)
       quantityChoice.value.quantity < 1 ||
@@ -88,12 +101,10 @@ let productChoice = document.getElementById("addToCart");
     ) {
       alert("Pour valider votre choix, veuillez renseigner une couleur et/ou une quantité valide");
     } else {
-      Cart();
+      addToCart(productId, colorChoice.value, quantityChoice.value);
       console.log("clic effectué");
       document.getElementById("addToCart").textContent = "Et Hop!";
     }
-
-    addToCart(productId, colorChoice.value, quantityChoice.value);
 });
 
 
@@ -104,10 +115,6 @@ function getCart() {
   } else {
    return JSON.parse(cart);
   }
-}
-
-function saveCart(products) {
-  localStorage.setItem(JSON.stringify.products)
 }
 
 // Cart.findIndex(item => {productId, colorChoice, quantityChoice});
