@@ -89,15 +89,15 @@ function addToCart(productId, color, amount) {
 
 let productChoice = document.getElementById("addToCart");
       productChoice.addEventListener("click", () => {
-    let colorChoice = document.getElementById("colors").value;
-    let quantityChoice = document.getElementById("quantity").value;
+    let colorChoice = document.getElementById("colors");
+    let quantityChoice = document.getElementById("quantity");
     if (
     //valeurs dynamiques (non définies au départ, il faut cliquer et changer la valeur pour accéder à la logique)
-      quantityChoice.value.quantity < 1 ||
-      quantityChoice.value.quantity > 100 ||
-      quantityChoice.value.quantity === undefined ||
-      colorChoice.value.color === "" ||
-      colorChoice.value.color === undefined
+      quantityChoice.value < 1 || 
+      quantityChoice.value > 100 ||
+      quantityChoice.value === undefined && 
+      colorChoice.value === "" || 
+      colorChoice.value === undefined
     ) {
       alert("Pour valider votre choix, veuillez renseigner une couleur et/ou une quantité valide");
     } else {
