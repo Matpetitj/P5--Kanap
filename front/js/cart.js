@@ -16,27 +16,19 @@
 
 // //Ici il faut créer une fonction pour afficher les produits dans le panier lorsqu'on les ajoute
 
-// function fullCart(index) {
-//     let cart = JSON.parse(localStorage.getItem("cartStock"));
-//      if (cart && cart.length != 0) {
-//       for (const choice of cart) {
-//         console.log(choice);
-//         for (let g = 0, h = index.length; g < h; g++) {
-//           if (choice._id === index[g]._id) {
-//             choice.name = index[g].name;
-//             choice.price = index[g].price;
-//             choice.image = index[g].imageUrl;
-//             choice.description = index[g].description;
-//             choice.alt = index[g].altTxt;
-//           }
-//         }
-//       }
-//       show(cart);
-//     } else {
-//       document.getElementById("totalQuantity").innerHTML = "0";
-//       document.getElementById("totalPrice").innerHTML = "0";
-//       document.querySelector("h1").innerHTML = "Panier vide";
-//     }
-//     modifQuantity();
-//     suppr();
-//   }
+let productLocalStorage = JSON.parse(localStorage.getItem("product"));
+
+if (productLocalStorage) {
+
+    const titleCart = document.querySelector("h1");
+    const sectionCart = document.querySelector(".cart");
+
+    titleCart.innerHTML = "Votre panier est vide !";
+    sectionCart.style.display = "none";
+
+} else {
+
+    for (let i=0; i < productLocalStorage.length; i++) {
+
+    }
+}
