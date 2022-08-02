@@ -15,20 +15,36 @@
 //     }
 
 // //Ici il faut créer une fonction pour afficher les produits dans le panier lorsqu'on les ajoute
+fetch("http://localhost:3000/api/products")
 
 let productLocalStorage = JSON.parse(localStorage.getItem("product"));
 
 if (productLocalStorage) {
 
-    const titleCart = document.querySelector("h1");
-    const sectionCart = document.querySelector(".cart");
+    const cartTitle = document.querySelector("h1");
+    const cartSection = document.querySelector(".cart");
 
-    titleCart.innerHTML = "Votre panier est vide !";
-    sectionCart.style.display = "none";
+    cartTitle.textContent = "Votre panier est vide !";
+    cartSection.style.display = "none";
 
 } else {
 
-    for (let i=0; i < productLocalStorage.length; i++) {
+    for (let i = 0; i < productLocalStorage.length; i++) {
 
+        const zoneCart = document.getElementById("items");
+
+        const productArticle = document.createElement("article")
+        productArticle.className = "cart__item";
+        productArticle.setAttribute("data-id", productLocalStorage[i].productId);
+        zoneCart.appendChild(productArticle);
+
+        const productImgDiv = document.createElement("div");
+        productImgDiv.className = "cart__item__img";
+        productArticle.appendChild(productImgDiv);
+        
+        const productImg = document.createElement("img");
+        productImg.setAttribute('src', products.imageUrl);
+        productImg.setAttribute('alt', product.altTxt);
+        productImgDiv.appendChild(productImg);
     }
 }
