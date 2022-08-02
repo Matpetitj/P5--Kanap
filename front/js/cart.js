@@ -22,9 +22,9 @@ let productLocalStorage = JSON.parse(localStorage.getItem("product"));
 if (productLocalStorage) {
 
     const cartTitle = document.querySelector("h1");
-    const cartSection = document.querySelector(".cart");
-
     cartTitle.textContent = "Votre panier est vide !";
+
+    const cartSection = document.querySelector(".cart");
     cartSection.style.display = "none";
 
 } else {
@@ -36,6 +36,7 @@ if (productLocalStorage) {
         const productArticle = document.createElement("article")
         productArticle.className = "cart__item";
         productArticle.setAttribute("data-id", productLocalStorage[i].productId);
+        productArticle.setAttribute("data-color", productLocalStorage[i], color);
         zoneCart.appendChild(productArticle);
 
         const productImgDiv = document.createElement("div");
@@ -46,5 +47,17 @@ if (productLocalStorage) {
         productImg.setAttribute('src', products.imageUrl);
         productImg.setAttribute('alt', product.altTxt);
         productImgDiv.appendChild(productImg);
+
+        const productItemContent = document.createElement("div");
+        productItemContent.className = "cart__item__content";
+        productArticle.appendChild(productItemContent);
+
+        const productItemContentTitleprice = document.createElement("div");
+        productItemContentTitleprice.className = "cart__item__content__titlePrice";
+        productItemContent.appendChild(productItemContentTitleprice);
+
+        const productTitle = document.createElement("h2");
+        productTitle.textContent = product.name;
+        productItemContentTitleprice.appendChild(productTitle);
     }
 }
