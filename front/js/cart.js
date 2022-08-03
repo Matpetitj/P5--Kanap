@@ -31,7 +31,7 @@ if (productLocalStorage) {
 
     for (let i = 0; i < productLocalStorage.length; i++) {
 
-        const zoneCart = document.getElementById("items");
+        const zoneCart = document.getElementById("cart__items");
 
         const productArticle = document.createElement("article")
         productArticle.className = "cart__item";
