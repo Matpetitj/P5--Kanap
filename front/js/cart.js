@@ -52,12 +52,66 @@ if (productLocalStorage) {
         productItemContent.className = "cart__item__content";
         productArticle.appendChild(productItemContent);
 
-        const productItemContentTitleprice = document.createElement("div");
-        productItemContentTitleprice.className = "cart__item__content__titlePrice";
-        productItemContent.appendChild(productItemContentTitleprice);
+        const productItemContentDescription = document.createElement("div");
+        productItemContentDescription.className = "cart__item__content__description";
+        productItemContent.appendChild(productItemContentDescription);
 
         const productTitle = document.createElement("h2");
         productTitle.textContent = product.name;
-        productItemContentTitleprice.appendChild(productTitle);
+        productItemContentDescription.appendChild(productTitle);
+
+        const productColor = document.createElement("p");
+        productColor.textContent = product.color;
+        productItemContentDescription.appendChild(productColor);
+
+        const productPrice = document.createElement("p");
+        productPrice.textContent = product.price;
+        productItemContentDescription.appendChild(productPrice);
+
+        const productItemContentSettings = document.createElement("div");
+        productItemContentSettings.className = "cart__item__content__settings";
+        productItemContent.appendChild(productItemContentSettings);
+
+        const productItemContentSettingsQuantity = document.createElement("div");
+        productItemContentSettingsQuantity.className = "cart__item__content__settings__quantity";
+        productItemContentSettings.appendChild(productItemContentSettingsQuantity);
+
+        const productQuantityValue = document.createElement("p");
+        productQuantityValue.textContent = product.amount;
+        productItemContentSettingsQuantity.appendChild(productQuantityValue);
+
+        const productQuantity = document.createElement("input");
+        productQuantity.value = productLocalStorage[i].amount;
+        productQuantity.className = "itemQuantity";
+        productQuantity.setAttribute("type", "number");
+        productQuantity.setAttribute("min", "1");
+        productQuantity.setAttribute("max", "100");
+        productQuantity.setAttribute("name", "itemQuantity");
+        productItemContentSettingsQuantity.appendChild(productQuantity);
+
+        const productItemContentSettingsDelete = document.createElement("div");
+        productItemContentSettingsDelete.className = "cart__item__content__settings__delete";
+        productItemContentSettings.appendChild(productItemContentSettingsDelete);
+
+        const productDelete = document.createElement("p");
+        productDelete.className = "deteleItem";
+        productDelete.textContent = "Supprimer";
+        productItemContentSettingsDelete.appendChild(productDelete);
+        productDelete.addEventListener("click", (e) => {
+            e.preventDefault;
+
+            let deleteId = productLocalStorage[i].productId;
+            let deleteColor = productLocalStorage[i].color;
+
+            productLocalStorage = productLocalStorage.filter(element => element.productId !== deleteId || element.color !== deleteColor);
+
+            localStorage.setItem('product', JSON.stringify(productLocalStorage));
+
+            if (productLocalStorage.length === 0) {
+                localStorage.clear(); //pas de else nécessaire
+            }
+
+            //un refresh de la page nécessaire?
+        });
     }
 }
