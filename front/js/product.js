@@ -82,8 +82,6 @@ function addToCart(productId, color, amount) {
   saveCart(cart);
 }
 
-
-
 let productChoice = document.getElementById("addToCart");
       productChoice.addEventListener("click", () => {
     let colorChoice = document.getElementById("colors");
