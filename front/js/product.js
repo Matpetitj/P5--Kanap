@@ -82,10 +82,7 @@ function addToCart(productId, color, amount) {
   saveCart(cart);
 }
 
-//sauvegarder le panier dans le localStorage
-  function saveCart(products) {
-  localStorage.setItem("product",JSON.stringify(products));
-}
+
 
 let productChoice = document.getElementById("addToCart");
       productChoice.addEventListener("click", () => {
@@ -106,13 +103,3 @@ let productChoice = document.getElementById("addToCart");
       document.getElementById("addToCart").textContent = "Et Hop!";
     }
 });
-
-
-function getCart() {
-  const cart = localStorage.getItem("product");
-  if (cart == null) {
-    return [];
-  } else {
-   return JSON.parse(cart);
-  }
-}

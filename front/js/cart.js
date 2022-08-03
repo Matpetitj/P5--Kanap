@@ -15,9 +15,8 @@
 //     }
 
 // //Ici il faut créer une fonction pour afficher les produits dans le panier lorsqu'on les ajoute
-fetch("http://localhost:3000/api/products")
 
-let productLocalStorage = JSON.parse(localStorage.getItem("product"));
+let productLocalStorage = getCart;
 
 if (productLocalStorage) {
 
@@ -29,7 +28,11 @@ if (productLocalStorage) {
 
 } else {
 
-    for (let i = 0; i < productLocalStorage.length; i++) {
+    for (const product of productLocalStorage) {
+
+        const productId = product._id;
+
+        fetch("http://localhost:3000/api/products/" + productId)
 
         const zoneCart = document.getElementById("cart__items");
 
