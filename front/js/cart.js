@@ -1,19 +1,3 @@
-// const cartPage = document.location.href;
-
-// //Le but est maintenant de récupérer les produits de l'API du script quand on est dans le panier donc SI
-
-// if (cart.match("cart")) {
-//     fetch("http://localhost:3000/api/products")
-//     //alors
-//       .then((res) => res.json())
-//       .then((listSofa) => {
-//           console.log(listSofa);
-//           fullCart(listSofa);
-//       })
-//     } else {
-//       console.log("Page confirmation");
-//     }
-
 // //Ici il faut créer une fonction pour afficher les produits dans le panier lorsqu'on les ajoute
 
 let productLocalStorage = getCart();
@@ -34,7 +18,9 @@ if (productLocalStorage.length == 0) {
         const color = product.color;
         const amount = product.amount;
 
-        fetch("http://localhost:3000/api/products/" + productId)
+        //Ici on récupère les informations des produits dans l'api mais aussi les informations du produit dans le localStorage
+
+        fetch("http://localhost:3000/api/products/" + productId) 
 
         .then((res) => res.json())
         .then((sofa) => {
@@ -105,22 +91,28 @@ if (productLocalStorage.length == 0) {
             productDelete.className = "deteleItem";
             productDelete.textContent = "Supprimer";
             productItemContentSettingsDelete.appendChild(productDelete);
-            productDelete.addEventListener("click", (e) => {
-                e.preventDefault;
-
-                let deleteId = productId;
-                let deleteColor = color;
-
-                productLocalStorage = productLocalStorage.filter(element => element.productId !== deleteId || element.color !== deleteColor);
-
-                localStorage.setItem('product', JSON.stringify(productLocalStorage));
-
-                if (productLocalStorage.length === 0) {
-                    localStorage.clear(); //pas de else nécessaire
-                }
-
-                //un refresh de la page nécessaire?
-            });
         })
     }
 }
+
+function findTotal() {
+    let productQuantity = document.getElementsByClassName('itemQuantity');
+    let productLength = productQuantity.length,
+    totalQuantity = 0;
+
+    for (let i = 0; i < productLength; ++i){
+        totalQuantity += productQuantity[i].valueAsNumber;
+    }
+
+    let itemTotalQuantity = document.getElementById("totalQuantity");
+    itemTotalQuantity.innerHTML = totalQuantity;
+
+    totalPrice = 0;
+    for (let i = 0; i < productLength; ++i) {
+        totalPrice += (productQuantity[i].valueAsNumber * productLocalStorage[i].price);
+    }
+
+    let productFinalPrice = document.getElementById('totalPrice');
+    productFinalPrice.innerHTML = totalPrice;
+}
+findTotal();
