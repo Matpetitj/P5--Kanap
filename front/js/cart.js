@@ -91,7 +91,7 @@ if (productLocalStorage.length == 0) {
             productDelete.className = "deteleItem";
             productDelete.textContent = "Supprimer";
             productItemContentSettingsDelete.appendChild(productDelete);
-        })
+        });
     }
 }
 
