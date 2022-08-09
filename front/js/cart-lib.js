@@ -12,20 +12,27 @@ function getCart() {
     localStorage.setItem("product",JSON.stringify(products));
   }
 
-  function deleteProduct () {
-    let deleteButton = document.querySelectorAll(".deleteItem");
-    for (j = 0; j < deleteButton.length; j++) {
-      deleteButton[j].addEventListener("click", (e) => {
-        e.preventDefault();
+  //Fonctionnalité de suppression
 
-        let deleteId = productLocalStorage[j].productId;
-        let deleteColor = productLocalStorage[j].color;
+  function deleteProduct () {
+    let deleteButton = document.getElementsByClassName('deleteItem');
+    for (i = 0; i < deleteButton.length; i++) {
+      deleteButton[i].addEventListener("click", (event) => {
+        event.preventDefault();
+
+        let deleteId = productLocalStorage[i].productId;
+        let deleteColor = getCart[i].color;
 
         productLocalStorage = productLocalStorage.filter( el => el.productId !== deleteId || el.color !== deleteColor);
 
-        localStorage.setItem("product", JSON.stringify(productLocalStorage));
+        localStorage.setItem("product", JSON.stringify(products));
 
         alert("Ce produit a bien été supprimé");
+
+        if(productLocalStorage.length === 0) {
+          localStorage.clear();
+        }
+
         location.reload();
       })
     }

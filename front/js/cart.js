@@ -95,24 +95,47 @@ if (productLocalStorage.length == 0) {
     }
 }
 
-function findTotal() {
-    let productQuantity = document.getElementsByClassName('itemQuantity');
-    let productLength = productQuantity.length,
+function findTotalPrice() {
+    const productQuantity = document.getElementsByClassName('itemQuantity');
+    const productLength = productQuantity.length,
     totalQuantity = 0;
 
-    for (let i = 0; i < productLength; ++i){
+    for (const i = 0; i < productLength; ++i){
         totalQuantity += productQuantity[i].valueAsNumber;
     }
 
-    let itemTotalQuantity = document.getElementById("totalQuantity");
+    const itemTotalQuantity = document.getElementById("totalQuantity");
     itemTotalQuantity.innerHTML = totalQuantity;
 
     totalPrice = 0;
-    for (let i = 0; i < productLength; ++i) {
+    for (const i = 0; i < productLength; ++i) {
         totalPrice += (productQuantity[i].valueAsNumber * productLocalStorage[i].price);
     }
 
-    let productFinalPrice = document.getElementById('totalPrice');
+    const productFinalPrice = document.getElementById('totalPrice');
     productFinalPrice.innerHTML = totalPrice;
 }
 findTotal();
+
+function totalProductAmount () {
+    let modifyQuantity = document.getElementsByClassName('itemQuantity');
+
+    for (const i = 0; i < modifyQuantity.length; i++) {
+        modifyQuantity[i].addEventListener("change", (event) => {
+            event.preventDefault();
+
+            const newProductQuandtity = productLocalStorage[i].amount;
+            const newProductQuandtityValue = modifyQuantity[i].valueAsNumber;
+
+            const resultProductQuantity = productLocalStorage.find((el) => el.newProductQuandtityValue !== newProductQuandtity);
+
+            resultProductQuantity.amount = newProductQuandtityValue;
+            productLocalStorage[i].amount = resultProductQuantity.amount;
+
+            localStorage.setItem("product", JSON.stringify(products));
+
+            location.reload();
+        })
+    }
+}
+totalProductAmount();
