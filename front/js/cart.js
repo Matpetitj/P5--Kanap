@@ -59,7 +59,7 @@ if (productLocalStorage.length == 0) {
             productItemContentDescription.appendChild(productColor);
 
             const productPrice = document.createElement("p");
-            productPrice.textContent = sofa.price;
+            productPrice.textContent = sofa.price + " €";
             productItemContentDescription.appendChild(productPrice);
 
             const productItemContentSettings = document.createElement("div");
@@ -95,37 +95,51 @@ if (productLocalStorage.length == 0) {
     }
 }
 
-function findTotalPrice() {
-    const productQuantity = document.getElementsByClassName('itemQuantity');
-    const productLength = productQuantity.length,
-    totalQuantity = 0;
+// function findTotalQuantityPrice() {
+//     const productQuantity = document.getElementsByClassName('itemQuantity');
+//     const productLength = productQuantity.length,
+//     totalQuantity = 0;
 
-    for (const i = 0; i < productLength; ++i){
-        totalQuantity += productQuantity[i].valueAsNumber;
-    }
+//     for (const i = 0; i < productLength; ++i){
+//         totalQuantity += productQuantity[i].value;
+//     }
 
-    const itemTotalQuantity = document.getElementById("totalQuantity");
-    itemTotalQuantity.innerHTML = totalQuantity;
+//     const itemTotalQuantity = document.getElementById("totalQuantity");
+//     itemTotalQuantity.innerHTML = totalQuantity;
 
-    totalPrice = 0;
-    for (const i = 0; i < productLength; ++i) {
-        totalPrice += (productQuantity[i].valueAsNumber * productLocalStorage[i].price);
-    }
+//     // totalPrice = 0;
 
-    const productFinalPrice = document.getElementById('totalPrice');
-    productFinalPrice.innerHTML = totalPrice;
+//     // for (const i = 0; i < productLength; ++i) {
+//     //     totalPrice += (productQuantity[i].value * productLocalStorage[i].price);
+//     // }
+
+//     // const productFinalPrice = document.getElementById("totalPrice");
+//     // productFinalPrice.innerHTML = totalPrice;
+// }
+// findTotalQuantityPrice();
+
+function totalCost () {
+
+    const totalPrice = 0;
+    const totalQuantity = 0;
+    const finalQuantity = document.getElementById("totalQuantity");
+    const finalPrice = document.getElementById("totalPrice");
+
+    totalPrice += price * amount;
+    totalQuantity += amount;
+    finalQuantity.innerHTML = totalQuantity;
+    finalPrice.innerHTML = totalPrice;
 }
-findTotal();
 
 function totalProductAmount () {
     let modifyQuantity = document.getElementsByClassName('itemQuantity');
 
     for (const i = 0; i < modifyQuantity.length; i++) {
-        modifyQuantity[i].addEventListener("change", (event) => {
+        modifyQuantity.addEventListener("change", (event) => {
             event.preventDefault();
 
             const newProductQuandtity = productLocalStorage[i].amount;
-            const newProductQuandtityValue = modifyQuantity[i].valueAsNumber;
+            const newProductQuandtityValue = modifyQuantity[i].value;
 
             const resultProductQuantity = productLocalStorage.find((el) => el.newProductQuandtityValue !== newProductQuandtity);
 

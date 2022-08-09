@@ -17,11 +17,11 @@ function getCart() {
   function deleteProduct () {
     let deleteButton = document.getElementsByClassName('deleteItem');
     for (i = 0; i < deleteButton.length; i++) {
-      deleteButton[i].addEventListener("click", (event) => {
+      deleteButton.addEventListener("click", (event) => {
         event.preventDefault();
 
         let deleteId = productLocalStorage[i].productId;
-        let deleteColor = getCart[i].color;
+        let deleteColor = productLocalStorage[i].color;
 
         productLocalStorage = productLocalStorage.filter( el => el.productId !== deleteId || el.color !== deleteColor);
 
