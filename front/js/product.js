@@ -96,7 +96,7 @@ let productChoice = document.getElementById("addToCart");
     ) {
       alert("Pour valider votre choix, veuillez renseigner une couleur et/ou une quantité valide");
     } else {
-      addToCart(productId, colorChoice.value, quantityChoice.value);
+      addToCart(productId, colorChoice.value, parseInt(quantityChoice.value));
       console.log("clic effectué");
       document.getElementById("addToCart").textContent = "Et Hop!";
     }

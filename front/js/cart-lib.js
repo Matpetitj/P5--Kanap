@@ -10,15 +10,13 @@ function getCart() {
   //sauvegarder le panier dans le localStorage
     function saveCart(products) {
     localStorage.setItem("product",JSON.stringify(products));
+    console.log(products);
   }
 
   //Fonctionnalité de suppression
 
   function deleteProduct () {
-    let deleteButton = document.getElementsByClassName('deleteItem');
     for (i = 0; i < deleteButton.length; i++) {
-      deleteButton.addEventListener("click", (event) => {
-        event.preventDefault();
 
         let deleteId = productLocalStorage[i].productId;
         let deleteColor = productLocalStorage[i].color;
@@ -34,7 +32,6 @@ function getCart() {
         }
 
         location.reload();
-      })
     }
   }
 

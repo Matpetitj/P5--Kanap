@@ -12,6 +12,9 @@ if (productLocalStorage.length == 0) {
 
 } else {
 
+    let totalPrice = 0;
+    let totalQuantity = 0;
+
     for (const product of productLocalStorage) {
 
         const productId = product._id;
@@ -91,6 +94,23 @@ if (productLocalStorage.length == 0) {
             productDelete.className = "deteleItem";
             productDelete.textContent = "Supprimer";
             productItemContentSettingsDelete.appendChild(productDelete);
+
+            let deleteButton = document.getElementsByClassName('deleteItem');
+            productDelete.addEventListener("click", () => {
+                //To do code suppression du produit
+                
+            })
+
+            totalPrice += sofa.price * amount;
+            totalQuantity += amount;
+
+            const finalQuantityElement = document.getElementById("totalQuantity");
+            const finalPriceElement = document.getElementById("totalPrice");
+
+            finalQuantityElement.textContent = totalQuantity;
+            finalPriceElement.textContent = totalPrice;
+            console.log("mise à jour des prix", totalPrice);
+            
         });
     }
 }
@@ -118,18 +138,6 @@ if (productLocalStorage.length == 0) {
 // }
 // findTotalQuantityPrice();
 
-function totalCost () {
-
-    const totalPrice = 0;
-    const totalQuantity = 0;
-    const finalQuantity = document.getElementById("totalQuantity");
-    const finalPrice = document.getElementById("totalPrice");
-
-    totalPrice += price * amount;
-    totalQuantity += amount;
-    finalQuantity.innerHTML = totalQuantity;
-    finalPrice.innerHTML = totalPrice;
-}
 
 function totalProductAmount () {
     let modifyQuantity = document.getElementsByClassName('itemQuantity');
