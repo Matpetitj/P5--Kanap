@@ -243,3 +243,56 @@ function getForm() {
     });
 }
 getForm();
+
+function sendForm(){
+    const btn_order = document.getElementById("order");
+
+    btn_order.addEventListener("click", (event) => {
+    
+        let inputName = document.getElementById('firstName');
+        let inputLastName = document.getElementById('lastName');
+        let inputAdress = document.getElementById('address');
+        let inputCity = document.getElementById('city');
+        let inputMail = document.getElementById('email');
+
+        let productsId = [];
+        for (let i = 0; i < productLocalStorage.length ;i++) {
+            productsId.push(productLocalStorage[i].productId);
+        }
+        console.log(productsId);
+
+        const order = {
+            contact : {
+                firstName: inputName.value,
+                lastName: inputLastName.value,
+                address: inputAdress.value,
+                city: inputCity.value,
+                email: inputMail.value,
+            },
+            products: productsId,
+        } 
+
+        const options = {
+            method: 'POST',
+            body: JSON.stringify(order),
+            headers: {
+                'Accept': 'application/json', 
+                "Content-Type": "application/json" 
+            },
+        };
+
+        fetch("http://localhost:3000/api/products/order", options)
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data);
+            localStorage.clear();
+            localStorage.setItem("orderId", data.orderId);
+
+            document.location.href = "confirmation.html";
+        })
+        .catch((err) => {
+            alert ("Problème avec fetch : " + err.message);
+        });
+        })
+}
+sendForm();
