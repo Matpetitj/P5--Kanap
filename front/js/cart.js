@@ -175,7 +175,7 @@ function getForm() {
     const validFirstName = function(areaFirstName) {
         let firstNameErrorMsg = areaFirstName.nextElementSibling;
 
-        if (charRegExp.test(areaFirstName.value)) {
+        if (charReg.test(areaFirstName.value)) {
             firstNameErrorMsg.textContent = '';
         } else {
             firstNameErrorMsg.textContent = 'Veuillez renseigner ce champ.';
@@ -189,7 +189,7 @@ function getForm() {
     const validLastName = function(areaLastName) {
         let lastNameErrorMsg = areaLastName.nextElementSibling;
 
-        if (charRegExp.test(areaLastName.value)) {
+        if (charReg.test(areaLastName.value)) {
             lastNameErrorMsg.textContent = '';
         } else {
             lastNameErrorMsg.textContent = 'Veuillez renseigner ce champ.';
@@ -203,7 +203,7 @@ function getForm() {
     const validAddress = function(areaAddress) {
         let addressErrorMsg = areaAddress.nextElementSibling;
 
-        if (addressRegExp.test(areaAddress.value)) {
+        if (addressReg.test(areaAddress.value)) {
             addressErrorMsg.textContent = '';
         } else {
             addressErrorMsg.textContent = 'Veuillez renseigner ce champ.';
@@ -217,7 +217,7 @@ function getForm() {
     const validCity = function(areaCity) {
         let cityErrorMsg = areaCity.nextElementSibling;
 
-        if (charRegExp.test(areaCity.value)) {
+        if (charReg.test(areaCity.value)) {
             cityErrorMsg.textContent = '';
         } else {
             cityErrorMsg.textContent = 'Veuillez renseigner ce champ.';
@@ -231,7 +231,7 @@ function getForm() {
     const validEmail = function(areaEmail) {
         let emailErrorMsg = areaEmail.nextElementSibling;
 
-        if (emailRegExp.test(areaEmail.value)) {
+        if (emailReg.test(areaEmail.value)) {
             emailErrorMsg.textContent = '';
         } else {
             emailErrorMsg.textContent = 'Veuillez renseigner votre email.';
