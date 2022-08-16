@@ -161,3 +161,85 @@ function totalProductAmount () {
     }
 }
 totalProductAmount();
+// faire appel à getcart()
+
+//Gestion du formulaire
+
+function getForm() {
+    let form = document.querySelector(".cart__order__form");
+
+    const addressReg = new RegExp("^[0-9]{1,3}(?:(?:[,. ]){1}[-a-zA-Zàâäéèêëïîôöùûüç]+)+");
+    const emailReg = new RegExp('^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$');
+    const charReg = new RegExp("^[a-zA-Z ,.'-]+$");
+
+    const validFirstName = function(areaFirstName) {
+        let firstNameErrorMsg = areaFirstName.nextElementSibling;
+
+        if (charRegExp.test(areaFirstName.value)) {
+            firstNameErrorMsg.textContent = '';
+        } else {
+            firstNameErrorMsg.textContent = 'Veuillez renseigner ce champ.';
+        }
+    };
+
+    form.firstName.addEventListener('change', function() {
+        validFirstName(this);
+    });
+
+    const validLastName = function(areaLastName) {
+        let lastNameErrorMsg = areaLastName.nextElementSibling;
+
+        if (charRegExp.test(areaLastName.value)) {
+            lastNameErrorMsg.textContent = '';
+        } else {
+            lastNameErrorMsg.textContent = 'Veuillez renseigner ce champ.';
+        }
+    };
+
+    form.lastName.addEventListener('change', function() {
+        validLastName(this);
+    });
+
+    const validAddress = function(areaAddress) {
+        let addressErrorMsg = areaAddress.nextElementSibling;
+
+        if (addressRegExp.test(areaAddress.value)) {
+            addressErrorMsg.textContent = '';
+        } else {
+            addressErrorMsg.textContent = 'Veuillez renseigner ce champ.';
+        }
+    };
+
+    form.address.addEventListener('change', function() {
+        validAddress(this);
+    });
+
+    const validCity = function(areaCity) {
+        let cityErrorMsg = areaCity.nextElementSibling;
+
+        if (charRegExp.test(areaCity.value)) {
+            cityErrorMsg.textContent = '';
+        } else {
+            cityErrorMsg.textContent = 'Veuillez renseigner ce champ.';
+        }
+    };
+
+    form.city.addEventListener('change', function() {
+        validCity(this);
+    });
+
+    const validEmail = function(areaEmail) {
+        let emailErrorMsg = areaEmail.nextElementSibling;
+
+        if (emailRegExp.test(areaEmail.value)) {
+            emailErrorMsg.textContent = '';
+        } else {
+            emailErrorMsg.textContent = 'Veuillez renseigner votre email.';
+        }
+    };
+
+    form.email.addEventListener('change', function() {
+        validEmail(this);
+    });
+}
+getForm();
