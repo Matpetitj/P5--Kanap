@@ -95,11 +95,25 @@ if (productLocalStorage.length == 0) {
             productDelete.textContent = "Supprimer";
             productItemContentSettingsDelete.appendChild(productDelete);
 
-            let deleteButton = document.getElementsByClassName('deleteItem');
+            let deleteButton = document.querySelectorAll(".deleteItem");
             productDelete.addEventListener("click", () => {
                 //To do code suppression du produit
                 
-            })
+            });
+
+            const deleteProduct = async (productLocalStorage) => {
+                await productLocalStorage;
+                let carts = document.querySelectorAll(".deleteItem");
+
+                carts.forEach((cartProduct) => {
+                    cartProduct.addEventListener("click", () => {
+                        
+                        let deleteProductRemove = sofa.length;
+
+                        
+                    });
+                });
+            }
 
             totalPrice += sofa.price * amount;
             totalQuantity += amount;
@@ -111,36 +125,15 @@ if (productLocalStorage.length == 0) {
             finalPriceElement.textContent = totalPrice;
             console.log("mise à jour des prix", totalPrice);
             
+            deleteProduct();
         });
     }
 }
 
-// function findTotalQuantityPrice() {
-//     const productQuantity = document.getElementsByClassName('itemQuantity');
-//     const productLength = productQuantity.length,
-//     totalQuantity = 0;
-
-//     for (const i = 0; i < productLength; ++i){
-//         totalQuantity += productQuantity[i].value;
-//     }
-
-//     const itemTotalQuantity = document.getElementById("totalQuantity");
-//     itemTotalQuantity.innerHTML = totalQuantity;
-
-//     // totalPrice = 0;
-
-//     // for (const i = 0; i < productLength; ++i) {
-//     //     totalPrice += (productQuantity[i].value * productLocalStorage[i].price);
-//     // }
-
-//     // const productFinalPrice = document.getElementById("totalPrice");
-//     // productFinalPrice.innerHTML = totalPrice;
-// }
-// findTotalQuantityPrice();
 
 
 function totalProductAmount () {
-    let modifyQuantity = document.getElementsByClassName('itemQuantity');
+    let modifyQuantity = document.querySelector(".itemQuantity");
 
     for (const i = 0; i < modifyQuantity.length; i++) {
         modifyQuantity.addEventListener("change", (event) => {
