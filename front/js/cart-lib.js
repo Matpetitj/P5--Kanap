@@ -34,22 +34,3 @@ function getCart() {
         location.reload();
     }
   }
-
-  // function deleteItem() {
-  //     productDelete.addEventListener("click", (e) => {
-  //       e.preventDefault;
-
-  //       let deleteId = productId;
-  //       let deleteColor = color;
-
-  //       productLocalStorage = productLocalStorage.filter(element => element.productId !== deleteId || element.color !== deleteColor);
-
-  //       localStorage.setItem('product', JSON.stringify(productLocalStorage));
-
-  //       if (productLocalStorage.length === 0) {
-  //           localStorage.clear(); //pas de else nécessaire
-  //       }
-
-  //       location.reload();
-  //   });
-  // }
