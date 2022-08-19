@@ -103,33 +103,6 @@ if (productLocalStorage.length == 0) {
                 
             });
 
-            function addBasket (product) {
-                let foundProduct = productLocalStorage.find(p => p.id == productId);
-                if (foundProduct != undefined) {
-                    foundProduct.amount++;
-                } else {
-                    product.amount = 1;
-                    productLocalStorage.push(product);
-                }
-                saveCart(productLocalStorage);
-            }
-            addBasket();
-
-            function removeFromBasket(product) {
-                productLocalStorage = productLocalStorage.filter(p => p.id != productId);
-                saveCart(product);
-            }
-            removeFromBasket();
-
-            function changeAmount(productId, amount) {
-                let foundProduct = productLocalStorage.find(p => p.id == productId);
-                if(foundProduct != undefined) {
-                    foundProduct.amount += amount;
-                }
-                saveCart(productLocalStorage);
-            }
-            changeAmount();
-
             //Autre essai
 
             const deleteProduct = async (productLocalStorage) => {
@@ -155,7 +128,6 @@ if (productLocalStorage.length == 0) {
                         }
                     });
                 });
-                location.reload();
             }
 
             totalPrice += sofa.price * amount;
@@ -173,30 +145,6 @@ if (productLocalStorage.length == 0) {
     }
 }
 
-
-
-function totalProductAmount () {
-    let modifyQuantity = document.querySelector(".itemQuantity");
-
-    for (const i = 0; i < modifyQuantity.length; i++) {
-        modifyQuantity.addEventListener("change", (event) => {
-            event.preventDefault();
-
-            const newProductQuandtity = productLocalStorage[i].amount;
-            const newProductQuandtityValue = modifyQuantity[i].value;
-
-            const resultProductQuantity = productLocalStorage.find((el) => el.newProductQuandtityValue !== newProductQuandtity);
-
-            resultProductQuantity.amount = newProductQuandtityValue;
-            productLocalStorage[i].amount = resultProductQuantity.amount;
-
-            localStorage.setItem("product", JSON.stringify(products));
-
-            location.reload();
-        })
-    }
-}
-totalProductAmount();
 // faire appel à getcart()
 
 
@@ -285,7 +233,7 @@ getForm();
 function sendForm(){
     const btn_order = document.getElementById("order");
 
-    btn_order.addEventListener("click", (event) => {
+    btn_order.addEventListener("click", (e) => {
     
         let inputName = document.getElementById('firstName');
         let inputLastName = document.getElementById('lastName');
@@ -294,7 +242,7 @@ function sendForm(){
         let inputMail = document.getElementById('email');
 
         let productsId = [];
-        for (let i = 0; i < productLocalStorage.length ;i++) {
+        for (let i = 0; i < productLocalStorage.length ; i++) {
             productsId.push(productLocalStorage[i].productId);
         }
         console.log(productsId);
