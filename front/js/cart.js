@@ -109,8 +109,8 @@ if (productLocalStorage.length == 0) {
                 await productLocalStorage;
                 let carts = document.querySelectorAll(".deleteItem");
 
-                carts.forEach((cartProduct) => {
-                    cartProduct.addEventListener("click", () => {
+                carts.forEach((productDelete) => {
+                    productDelete.addEventListener("click", () => {
                         
                         let deleteProductRemove = sofa.length;
                         console.log(deleteProductRemove);
@@ -119,7 +119,7 @@ if (productLocalStorage.length == 0) {
                             return productLocalStorage.removeItem("product");
                         } else {
                             someProduct = sofa.filter(el => {
-                                if(cartProduct.dataset.id != el.id || cartProduct.dataset.color != el.color) {
+                                if(productDelete.dataset.id != el.id || productDelete.dataset.color != el.color) {
                                     return true;
                                 }
                             });
@@ -150,8 +150,7 @@ if (productLocalStorage.length == 0) {
 
 
 //GESTION DU FORMULAIRE
-
-function getForm() {
+document.addEventListener("DOMContentLoaded", function() {
     let form = document.querySelector(".cart__order__form");
 
     const addressReg = new RegExp("^[0-9]{1,3}(?:(?:[,. ]){1}[-a-zA-Zàâäéèêëïîôöùûüç]+)+");
@@ -227,13 +226,8 @@ function getForm() {
     form.email.addEventListener('change', function() {
         validEmail(this);
     });
-}
-getForm();
 
-function sendForm(){
-    const btn_order = document.getElementById("order");
-
-    btn_order.addEventListener("click", (e) => {
+    form.addEventListener("submit", (e) => {
     
         let inputName = document.getElementById('firstName');
         let inputLastName = document.getElementById('lastName');
@@ -279,6 +273,5 @@ function sendForm(){
         .catch((err) => {
             alert ("Problème avec fetch : " + err.message);
         });
-        })
-}
-sendForm();
+        });
+})
