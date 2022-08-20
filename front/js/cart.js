@@ -2,8 +2,6 @@
 
 let productLocalStorage = getCart();
 
-let someProduct = [];
-
 if (productLocalStorage.length == 0) {
 
     const cartTitle = document.querySelector("h1");
@@ -97,38 +95,23 @@ if (productLocalStorage.length == 0) {
             productDelete.textContent = "Supprimer";
             productItemContentSettingsDelete.appendChild(productDelete);
 
-            let deleteButton = document.querySelectorAll(".deleteItem");
             productDelete.addEventListener("click", () => {
-                //To do code suppression du produit
-                
+                let cart = getCart();
+                let index = -1;
+                for(let i = 0; i < cart.length; i++){
+                    const product = cart[i];
+                    if (product._id === productId && product.color === color){
+                        index = i;
+                    }
+                }
+                if (index !== -1){
+                    cart.splice(index, 1);
+                    saveCart(cart);
+                    //modifier avec le DOM avec element.closest()
+                    //recalculer quantité et prix totaux
+                    location.reload();
+                }
             });
-
-            //Autre essai
-
-            const deleteProduct = async (productLocalStorage) => {
-                await productLocalStorage;
-                let carts = document.querySelectorAll(".deleteItem");
-
-                carts.forEach((productDelete) => {
-                    productDelete.addEventListener("click", () => {
-                        
-                        let deleteProductRemove = sofa.length;
-                        console.log(deleteProductRemove);
-
-                        if(deleteProductRemove == 1) {
-                            return productLocalStorage.removeItem("product");
-                        } else {
-                            someProduct = sofa.filter(el => {
-                                if(productDelete.dataset.id != el.id || productDelete.dataset.color != el.color) {
-                                    return true;
-                                }
-                            });
-                        console.log(someProduct);
-                        localStorage.setItem("product", JSON.stringify(someProduct));
-                        }
-                    });
-                });
-            }
 
             totalPrice += sofa.price * amount;
             totalQuantity += amount;
@@ -140,7 +123,6 @@ if (productLocalStorage.length == 0) {
             finalPriceElement.textContent = totalPrice;
             console.log("mise à jour des prix", totalPrice);
             
-            deleteProduct();
         });
     }
 }

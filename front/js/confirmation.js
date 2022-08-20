@@ -1,8 +1,10 @@
-function mainAcceptation() {
+function mainOrder() {
     const order = document.getElementById("orderId");
     order.textContent = localStorage.getItem("orderId");
     console.log(localStorage.getItem("orderId"));
     localStorage.clear();
 }
 
-mainAcceptation();
+mainOrder();
+
+//faire un location refresh / redirect page js
