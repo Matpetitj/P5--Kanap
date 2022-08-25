@@ -87,7 +87,7 @@ if (productLocalStorage.length == 0) {
             productItemContentSettingsQuantity.appendChild(productQuantity);
 
             function modifyQuantity(){
-                productQuantity.addEventListener("input", () => {
+                productQuantity.addEventListener("change", () => {
                     let cart = getCart();
                     for (i = 0; i < productQuantity; i++){
                         if(product._id === productId && product.color === color){
@@ -267,7 +267,7 @@ document.addEventListener("DOMContentLoaded", function() {
             localStorage.clear();
             localStorage.setItem("orderId", data.orderId);
 
-            document.location.href = "confirmation.html";
+            document.location.href = "../html/confirmation.html"; //redirection vers la page confirmation
         })
         .catch((err) => {
             alert ("Problème avec fetch : " + err.message);
