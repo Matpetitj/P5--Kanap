@@ -109,7 +109,7 @@ if (productLocalStorage.length == 0) {
             productDelete.textContent = "Supprimer";
             productItemContentSettingsDelete.appendChild(productDelete);
 
-            function productDelete(){
+            function itemDelete(){
                 productDelete.addEventListener("click", () => {
                     let cart = getCart();
                     let index = -1;
@@ -128,7 +128,7 @@ if (productLocalStorage.length == 0) {
                     }
                 });
             }
-            productDelete();
+            itemDelete();
 
             totalPrice += sofa.price * amount;
             totalQuantity += amount;
