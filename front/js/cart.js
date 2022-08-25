@@ -74,7 +74,7 @@ if (productLocalStorage.length == 0) {
             productItemContentSettings.appendChild(productItemContentSettingsQuantity);
 
             const productQuantityValue = document.createElement("p");
-            productQuantityValue.textContent = amount;
+            productQuantityValue.textContent = "Qté :";
             productItemContentSettingsQuantity.appendChild(productQuantityValue);
 
             const productQuantity = document.createElement("input");
@@ -86,6 +86,20 @@ if (productLocalStorage.length == 0) {
             productQuantity.setAttribute("name", "itemQuantity");
             productItemContentSettingsQuantity.appendChild(productQuantity);
 
+            function modifyQuantity(){
+                productQuantity.addEventListener("input", () => {
+                    let cart = getCart();
+                    for (i = 0; i < productQuantity; i++){
+                        if(product._id === productId && product.color === color){
+                            productQuantity.amount++;
+                            saveCart(cart);
+                            productQuantity = JSON.parse(localStorage.getItem("product"));
+                        }
+                    }
+                });
+            }
+            modifyQuantity();
+
             const productItemContentSettingsDelete = document.createElement("div");
             productItemContentSettingsDelete.className = "cart__item__content__settings__delete";
             productItemContentSettings.appendChild(productItemContentSettingsDelete);
@@ -95,23 +109,26 @@ if (productLocalStorage.length == 0) {
             productDelete.textContent = "Supprimer";
             productItemContentSettingsDelete.appendChild(productDelete);
 
-            productDelete.addEventListener("click", () => {
-                let cart = getCart();
-                let index = -1;
-                for(let i = 0; i < cart.length; i++){
-                    const product = cart[i];
-                    if (product._id === productId && product.color === color){
-                        index = i;
+            function productDelete(){
+                productDelete.addEventListener("click", () => {
+                    let cart = getCart();
+                    let index = -1;
+                    for(let i = 0; i < cart.length; i++){
+                        const product = cart[i];
+                        if (product._id === productId && product.color === color){
+                            index = i;
+                        }
                     }
-                }
-                if (index !== -1){
-                    cart.splice(index, 1);
-                    saveCart(cart);
-                    //modifier avec le DOM avec element.closest()
-                    //recalculer quantité et prix totaux
-                    location.reload();
-                }
-            });
+                    if (index !== -1){
+                        cart.splice(index, 1);
+                        saveCart(cart);
+                        //modifier le DOM avec element.closest()
+                        //recalculer quantité et prix totaux
+                        location.reload();
+                    }
+                });
+            }
+            productDelete();
 
             totalPrice += sofa.price * amount;
             totalQuantity += amount;
@@ -122,7 +139,7 @@ if (productLocalStorage.length == 0) {
             finalQuantityElement.textContent = totalQuantity;
             finalPriceElement.textContent = totalPrice;
             console.log("mise à jour des prix", totalPrice);
-            
+
         });
     }
 }
@@ -209,7 +226,7 @@ document.addEventListener("DOMContentLoaded", function() {
         validEmail(this);
     });
 
-    form.addEventListener("submit", (e) => {
+    form.addEventListener("submit", (event) => {
     
         let inputName = document.getElementById('firstName');
         let inputLastName = document.getElementById('lastName');
