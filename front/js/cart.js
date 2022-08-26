@@ -87,8 +87,10 @@ if (productLocalStorage.length == 0) {
             productItemContentSettingsQuantity.appendChild(productQuantity);
 
             function modifyQuantity(){
-                productQuantity.addEventListener("change", () => {
-                    let cart = getCart();
+                let newQuantity = document.querySelector(".itemQuantity");
+                let cart = getCart();
+                newQuantity.addEventListener("change", (event) => {
+                    event.preventDefault();
                     for (i = 0; i < productQuantity; i++){
                         if(product._id === productId && product.color === color){
                             productQuantity.amount++;
