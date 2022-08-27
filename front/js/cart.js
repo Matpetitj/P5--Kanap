@@ -87,24 +87,15 @@ if (productLocalStorage.length == 0) {
             productItemContentSettingsQuantity.appendChild(productQuantity);
 
             function modifyQuantity(){
-                let newQuantity = document.querySelector(".itemQuantity");
                 let cart = getCart();
-                newQuantity.addEventListener("change", (event) => {
+                productQuantity.addEventListener("change", (event) => {
                     event.preventDefault();
-                    for (i = 0; i < productQuantity; i++){
-                        if(product._id === productId && product.color === color){
-
-                            let newModifyQuantity = cart[i].amount;
-                            let newQuantityValue = newQuantity[i].value;
-
-                            const result = cart.find((el) => el.newQuantityValue !== newModifyQuantity);
-
-                            result.amount = newQuantityValue;
+                    for (let i = 0; i < cart.length; i++){
+                        if(cart[i]._id === productId && cart[i].color === color){
+                            cart[i].amount = parseInt(productQuantity.value);
 
                             saveCart(cart);
-                            productQuantity = JSON.parse(localStorage.getItem("product"));
-
-                            location.reload();
+                            // location.reload();
                         }
                     }
                 });
@@ -135,7 +126,7 @@ if (productLocalStorage.length == 0) {
                         saveCart(cart);
                         //modifier le DOM avec element.closest()
                         //recalculer quantité et prix totaux
-                        location.reload();
+                        //location.reload();
                     }
                 });
             }
@@ -151,9 +142,18 @@ if (productLocalStorage.length == 0) {
             finalPriceElement.textContent = totalPrice;
             console.log("mise à jour des prix", totalPrice);
 
+            //faire appel refreshQuantityPrice();
         });
     }
 }
+
+//créer une fonction refreshQuantityPrice
+//refaire fetch+then(pour récupérer les prix de produits)
+//avec un getCart();
+//compter les produits
+//nvx prix
+//document.byId
+//uptade du textContent
 
 //GESTION DU FORMULAIRE
 document.addEventListener("DOMContentLoaded", function() {
@@ -234,6 +234,9 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     form.addEventListener("submit", (event) => {
+        const cart = getCart();
+
+        event.preventDefault();
     
         let inputName = document.getElementById('firstName');
         let inputLastName = document.getElementById('lastName');
@@ -242,8 +245,8 @@ document.addEventListener("DOMContentLoaded", function() {
         let inputMail = document.getElementById('email');
 
         let productsId = [];
-        for (let i = 0; i < productLocalStorage.length ; i++) {
-            productsId.push(productLocalStorage[i].productId);
+        for (let i = 0; i < cart.length ; i++) {
+            productsId.push(cart[i]._id);
         }
         console.log(productsId);
 
@@ -271,10 +274,10 @@ document.addEventListener("DOMContentLoaded", function() {
         .then((response) => response.json())
         .then((data) => {
             console.log(data);
-            localStorage.clear();
+            // localStorage.removeItem("product");
             localStorage.setItem("orderId", data.orderId);
 
-            document.location.href = "../html/confirmation.html"; //redirection vers la page confirmation
+            window.location.href = "confirmation.html"; //redirection vers la page confirmation
         })
         .catch((err) => {
             alert ("Problème avec fetch : " + err.message);

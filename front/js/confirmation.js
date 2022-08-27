@@ -2,9 +2,9 @@ function mainOrder() {
     const order = document.getElementById("orderId");
     order.textContent = localStorage.getItem("orderId");
     console.log(localStorage.getItem("orderId"));
-    localStorage.clear();
+    localStorage.removeItem("orderId");
 }
 
 mainOrder();
 
-//faire un location refresh / redirect page js
+//faire un localisation refresh / redirect page js
