@@ -93,9 +93,18 @@ if (productLocalStorage.length == 0) {
                     event.preventDefault();
                     for (i = 0; i < productQuantity; i++){
                         if(product._id === productId && product.color === color){
-                            productQuantity.amount++;
+
+                            let newModifyQuantity = cart[i].amount;
+                            let newQuantityValue = newQuantity[i].value;
+
+                            const result = cart.find((el) => el.newQuantityValue !== newModifyQuantity);
+
+                            result.amount = newQuantityValue;
+
                             saveCart(cart);
                             productQuantity = JSON.parse(localStorage.getItem("product"));
+
+                            location.reload();
                         }
                     }
                 });
@@ -145,10 +154,6 @@ if (productLocalStorage.length == 0) {
         });
     }
 }
-
-// faire appel à getcart()
-
-
 
 //GESTION DU FORMULAIRE
 document.addEventListener("DOMContentLoaded", function() {
@@ -220,7 +225,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (emailReg.test(areaEmail.value)) {
             emailErrorMsg.textContent = '';
         } else {
-            emailErrorMsg.textContent = 'Veuillez renseigner votre email.';
+            emailErrorMsg.textContent = 'Veuillez renseigner un email valide email.';
         }
     };
 
