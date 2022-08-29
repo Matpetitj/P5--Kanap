@@ -127,6 +127,16 @@ if (productLocalStorage.length == 0) {
                         //modifier le DOM avec element.closest()
                         //recalculer quantité et prix totaux
                         //location.reload();
+
+
+                        // totalPrice += sofa.price * amount;
+                        // totalQuantity += amount;
+
+                        // const finalQuantityElement = document.getElementById("totalQuantity");
+                        // const finalPriceElement = document.getElementById("totalPrice");
+
+                        // finalQuantityElement.textContent = totalQuantity;
+                        // finalPriceElement.textContent = totalPrice;
                     }
                 });
             }
@@ -143,8 +153,33 @@ if (productLocalStorage.length == 0) {
             console.log("mise à jour des prix", totalPrice);
 
             //faire appel refreshQuantityPrice();
+            refreshQuantityPrice();
         });
     }
+}
+
+function refreshQuantityPrice (){
+    fetch("http://localhost:3000/api/products/")
+
+    .then((res) => res.json())
+        .then((sofa) => {
+        console.log(sofa);
+        refreshQuantityPrice(sofa);
+    })
+
+    let cart = getCart();
+
+    let totalPrice = 0;
+    let totalQuantity = 0;
+
+    totalPrice += sofa.price * product.amount;
+    totalQuantity += product.amount;
+
+    const finalQuantityElement = document.getElementById("totalQuantity");
+    const finalPriceElement = document.getElementById("totalPrice");
+    finalQuantityElement.textContent = totalQuantity;
+    finalPriceElement.textContent = totalPrice;
+    console.log("mise à jour des prix", totalPrice);
 }
 
 //créer une fonction refreshQuantityPrice
