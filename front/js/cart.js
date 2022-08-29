@@ -127,32 +127,26 @@ if (productLocalStorage.length == 0) {
                         //modifier le DOM avec element.closest()
                         //recalculer quantité et prix totaux
                         //location.reload();
-
-
-                        // totalPrice += sofa.price * amount;
-                        // totalQuantity += amount;
-
-                        // const finalQuantityElement = document.getElementById("totalQuantity");
-                        // const finalPriceElement = document.getElementById("totalPrice");
-
-                        // finalQuantityElement.textContent = totalQuantity;
-                        // finalPriceElement.textContent = totalPrice;
                     }
                 });
             }
             itemDelete();
 
-            totalPrice += sofa.price * amount;
-            totalQuantity += amount;
+            function totalPriceAndQuandity() {
 
-            const finalQuantityElement = document.getElementById("totalQuantity");
-            const finalPriceElement = document.getElementById("totalPrice");
+                totalPrice += sofa.price * amount;
+                totalQuantity += amount;
 
-            finalQuantityElement.textContent = totalQuantity;
-            finalPriceElement.textContent = totalPrice;
-            console.log("mise à jour des prix", totalPrice);
+                const finalQuantityElement = document.getElementById("totalQuantity");
+                const finalPriceElement = document.getElementById("totalPrice");
 
+                finalQuantityElement.textContent = totalQuantity;
+                finalPriceElement.textContent = totalPrice;
+                console.log("mise à jour des prix", totalPrice);
+            }
+            totalPriceAndQuandity();
             //faire appel refreshQuantityPrice();
+
             refreshQuantityPrice();
         });
     }
@@ -161,19 +155,18 @@ if (productLocalStorage.length == 0) {
 function refreshQuantityPrice (){
     fetch("http://localhost:3000/api/products/")
 
-    .then((res) => res.json())
+        .then((res) => res.json())
         .then((sofa) => {
         console.log(sofa);
-        refreshQuantityPrice(sofa);
     })
 
-    let cart = getCart();
+    getCart();
 
     let totalPrice = 0;
     let totalQuantity = 0;
 
-    totalPrice += sofa.price * product.amount;
-    totalQuantity += product.amount;
+    totalPrice += sofa.price * amount;
+    totalQuantity += amount;
 
     const finalQuantityElement = document.getElementById("totalQuantity");
     const finalPriceElement = document.getElementById("totalPrice");
