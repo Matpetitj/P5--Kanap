@@ -86,15 +86,16 @@ if (productLocalStorage.length == 0) {
             productQuantity.setAttribute("name", "itemQuantity");
             productItemContentSettingsQuantity.appendChild(productQuantity);
 
-            function modifyQuantity(){
-                let cart = getCart();
+            function modifyQuantity(){           
                 productQuantity.addEventListener("change", (event) => {
+                    let cart = getCart();
                     event.preventDefault();
                     for (let i = 0; i < cart.length; i++){
                         if(cart[i]._id === productId && cart[i].color === color){
                             cart[i].amount = parseInt(productQuantity.value);
-
+                            console.log(productId, color, parseInt(productQuantity.value), cart[i]);
                             saveCart(cart);
+                            refreshQuantityPrice();
                             // location.reload();
                         }
                     }
@@ -125,6 +126,7 @@ if (productLocalStorage.length == 0) {
                         cart.splice(index, 1);
                         saveCart(cart);
                         //modifier le DOM avec element.closest()
+                        refreshQuantityPrice();
                         //recalculer quantité et prix totaux
                         //location.reload();
                     }
@@ -145,35 +147,36 @@ if (productLocalStorage.length == 0) {
                 console.log("mise à jour des prix", totalPrice);
             }
             totalPriceAndQuandity();
-            //faire appel refreshQuantityPrice();
-
-            refreshQuantityPrice();
         });
     }
 }
 
 function refreshQuantityPrice (){
-    fetch("http://localhost:3000/api/products/")
 
-        .then((res) => res.json())
-        .then((sofa) => {
-        console.log(sofa);
-    })
-
-    getCart();
+    let cart = getCart();
 
     let refreshPrice = 0;
     let refreshQuantity = 0;
 
-    refreshPrice += price * amount;
-    refreshQuantity += amount;
+    for (const product of cart) {
+        fetch("http://localhost:3000/api/products/"  + product._id)
 
-    const refreshQuantityElement = document.getElementById("totalQuantity");
-    const refreshPriceElement = document.getElementById("totalPrice");
+            .then((res) => res.json())
+            .then((sofa) => {
+                console.log(sofa);
 
-    refreshQuantityElement.textContent = refreshQuantity;
-    refreshPriceElement.textContent = refreshPrice;
-    console.log("mise à jour des prix", refreshPrice);
+            refreshPrice += sofa.price * product.amount;
+            refreshQuantity += product.amount;
+
+            const refreshQuantityElement = document.getElementById("totalQuantity");
+            const refreshPriceElement = document.getElementById("totalPrice");
+
+            refreshQuantityElement.textContent = refreshQuantity;
+            refreshPriceElement.textContent = refreshPrice;
+
+            console.log("mise à jour des prix", refreshPrice);
+        })
+    }   
 }
 
 //créer une fonction refreshQuantityPrice

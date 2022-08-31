@@ -12,7 +12,4 @@ function getCart() {
     localStorage.setItem("product",JSON.stringify(products));
     console.log(products);
   }
-
-  //Fonctionnalité de suppression
-
   
