@@ -162,17 +162,18 @@ function refreshQuantityPrice (){
 
     getCart();
 
-    let totalPrice = 0;
-    let totalQuantity = 0;
+    let refreshPrice = 0;
+    let refreshQuantity = 0;
 
-    totalPrice += sofa.price * amount;
-    totalQuantity += amount;
+    refreshPrice += price * amount;
+    refreshQuantity += amount;
 
-    const finalQuantityElement = document.getElementById("totalQuantity");
-    const finalPriceElement = document.getElementById("totalPrice");
-    finalQuantityElement.textContent = totalQuantity;
-    finalPriceElement.textContent = totalPrice;
-    console.log("mise à jour des prix", totalPrice);
+    const refreshQuantityElement = document.getElementById("totalQuantity");
+    const refreshPriceElement = document.getElementById("totalPrice");
+
+    refreshQuantityElement.textContent = refreshQuantity;
+    refreshPriceElement.textContent = refreshPrice;
+    console.log("mise à jour des prix", refreshPrice);
 }
 
 //créer une fonction refreshQuantityPrice
