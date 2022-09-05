@@ -124,8 +124,9 @@ if (productLocalStorage.length == 0) {
                     }
                     if (index !== -1){
                         cart.splice(index, 1);
+                        let currentArticle = element.closest("cart__item");
+                        currentArticle.remove();
                         saveCart(cart);
-                        //modifier le DOM avec element.closest()
                         refreshQuantityPrice();
                         //recalculer quantité et prix totaux
                         //location.reload();
