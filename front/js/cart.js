@@ -113,7 +113,7 @@ if (productLocalStorage.length == 0) {
             productItemContentSettingsDelete.appendChild(productDelete);
 
             function itemDelete(){
-                productDelete.addEventListener("click", () => {
+                productDelete.addEventListener("click", (e) => {
                     let cart = getCart();
                     let index = -1;
                     for(let i = 0; i < cart.length; i++){
@@ -124,8 +124,9 @@ if (productLocalStorage.length == 0) {
                     }
                     if (index !== -1){
                         cart.splice(index, 1);
-                        let currentArticle = element.closest("cart__item");
-                        currentArticle.remove();
+                        let currentArticle = document.getElementById("cart__items");
+                        let deleteCurrentArticle = currentArticle.closest("cart__item");
+                        deleteCurrentArticle.remove(currentArticle);
                         saveCart(cart);
                         refreshQuantityPrice();
                         //recalculer quantité et prix totaux
