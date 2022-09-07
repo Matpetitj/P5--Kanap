@@ -2,14 +2,18 @@
 
 let productLocalStorage = getCart();
 
-if (productLocalStorage.length == 0) {
-
+function displayCartIsEmpty () {
     const cartTitle = document.querySelector("h1");
     cartTitle.textContent = "Votre panier est vide !";
 
     const cartSection = document.querySelector(".cart");
     cartSection.style.display = "none";
+}
 
+if (productLocalStorage.length == 0) {
+
+    displayCartIsEmpty ();
+    
 } else {
 
     let totalPrice = 0;
@@ -20,8 +24,6 @@ if (productLocalStorage.length == 0) {
         const productId = product._id;
         const color = product.color;
         const amount = product.amount;
-
-        //Ici on récupère les informations des produits dans l'api mais aussi les informations du produit dans le localStorage
 
         fetch("http://localhost:3000/api/products/" + productId) 
 
@@ -124,9 +126,8 @@ if (productLocalStorage.length == 0) {
                     }
                     if (index !== -1){
                         cart.splice(index, 1);
-                        let currentArticle = document.getElementById("cart__items");
-                        let deleteCurrentArticle = currentArticle.closest("cart__item");
-                        deleteCurrentArticle.remove(currentArticle);
+                        const article = productDelete.closest("article");
+                        article.remove("article");
                         saveCart(cart);
                         refreshQuantityPrice();
                         //recalculer quantité et prix totaux
@@ -160,34 +161,30 @@ function refreshQuantityPrice (){
     let refreshPrice = 0;
     let refreshQuantity = 0;
 
-    for (const product of cart) {
-        fetch("http://localhost:3000/api/products/"  + product._id)
+    if (cart.length > 0) {
+        for (const product of cart) {
+            fetch("http://localhost:3000/api/products/"  + product._id)
 
-            .then((res) => res.json())
-            .then((sofa) => {
-                console.log(sofa);
+                .then((res) => res.json())
+                .then((sofa) => {
+                    console.log(sofa);
 
-            refreshPrice += sofa.price * product.amount;
-            refreshQuantity += product.amount;
+                refreshPrice += sofa.price * product.amount;
+                refreshQuantity += product.amount;
 
-            const refreshQuantityElement = document.getElementById("totalQuantity");
-            const refreshPriceElement = document.getElementById("totalPrice");
+                const refreshQuantityElement = document.getElementById("totalQuantity");
+                const refreshPriceElement = document.getElementById("totalPrice");
 
-            refreshQuantityElement.textContent = refreshQuantity;
-            refreshPriceElement.textContent = refreshPrice;
+                refreshQuantityElement.textContent = refreshQuantity;
+                refreshPriceElement.textContent = refreshPrice;
 
-            console.log("mise à jour des prix", refreshPrice);
-        })
-    }   
+                console.log("mise à jour des prix", refreshPrice);
+            })
+        }
+    } else {
+        displayCartIsEmpty ();
+    }  
 }
-
-//créer une fonction refreshQuantityPrice
-//refaire fetch+then(pour récupérer les prix de produits)
-//avec un getCart();
-//compter les produits
-//nvx prix
-//document.byId
-//uptade du textContent
 
 //GESTION DU FORMULAIRE
 document.addEventListener("DOMContentLoaded", function() {
