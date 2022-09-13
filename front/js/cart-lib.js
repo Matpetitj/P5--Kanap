@@ -1,3 +1,4 @@
+//méthode pour récupérer le panier
 function getCart() {
     const cart = localStorage.getItem("product");
     if (cart == null) {
