@@ -1,7 +1,6 @@
-// //Ici il faut créer une fonction pour afficher les produits dans le panier lorsqu'on les ajoute
-
 let productLocalStorage = getCart();
 
+//Fonction pour afficher que le panier est vide
 function displayCartIsEmpty () {
     const cartTitle = document.querySelector("h1");
     cartTitle.textContent = "Votre panier est vide !";
@@ -19,12 +18,15 @@ if (productLocalStorage.length == 0) {
     let totalPrice = 0;
     let totalQuantity = 0;
 
+//création des items dans le DOM
     for (const product of productLocalStorage) {
 
+        //déclaration des variables produit
         const productId = product._id;
         const color = product.color;
         const amount = product.amount;
 
+        //appel de l'API en spécifiant l'id du produit
         fetch("http://localhost:3000/api/products/" + productId) 
 
         .then((res) => res.json())
@@ -88,15 +90,20 @@ if (productLocalStorage.length == 0) {
             productQuantity.setAttribute("name", "itemQuantity");
             productItemContentSettingsQuantity.appendChild(productQuantity);
 
+            //fonction pour modifier la quantité des produits dans le panier
             function modifyQuantity(){           
                 productQuantity.addEventListener("change", (event) => {
                     let cart = getCart();
                     event.preventDefault();
+                    //utilisation d'une boucle pour que la fonction se répète et qu'elle ne fonctionne pas seulement sur le premier produit
                     for (let i = 0; i < cart.length; i++){
                         if(cart[i]._id === productId && cart[i].color === color){
+                            //passage en chiffre
                             cart[i].amount = parseInt(productQuantity.value);
                             console.log(productId, color, parseInt(productQuantity.value), cart[i]);
+                            //sauvegarde dans le localStorage
                             saveCart(cart);
+                            //utilisation de la fonction refresh
                             refreshQuantityPrice();
                             // location.reload();
                         }
@@ -105,6 +112,7 @@ if (productLocalStorage.length == 0) {
             }
             modifyQuantity();
 
+            //création du bouton supprimer (qui est ici un texte)
             const productItemContentSettingsDelete = document.createElement("div");
             productItemContentSettingsDelete.className = "cart__item__content__settings__delete";
             productItemContentSettings.appendChild(productItemContentSettingsDelete);
@@ -114,29 +122,35 @@ if (productLocalStorage.length == 0) {
             productDelete.textContent = "Supprimer";
             productItemContentSettingsDelete.appendChild(productDelete);
 
+            //fonction de suppression de produit
             function itemDelete(){
+                //on écoute l'action sur le bouton
                 productDelete.addEventListener("click", (e) => {
                     let cart = getCart();
                     let index = -1;
                     for(let i = 0; i < cart.length; i++){
                         const product = cart[i];
+                        //identification du produit
                         if (product._id === productId && product.color === color){
                             index = i;
                         }
                     }
                     if (index !== -1){
+                        //suppression du produit
                         cart.splice(index, 1);
+                        //suppression de produit du DOM
                         const article = productDelete.closest("article");
                         article.remove("article");
+                        //envoi au localStorage
                         saveCart(cart);
+                        //fonction refresh panier
                         refreshQuantityPrice();
-                        //recalculer quantité et prix totaux
-                        //location.reload();
                     }
                 });
             }
             itemDelete();
 
+            //fonction pour calculer la quantité et le prix total du panier pour l'afficher
             function totalPriceAndQuandity() {
 
                 totalPrice += sofa.price * amount;
@@ -153,7 +167,7 @@ if (productLocalStorage.length == 0) {
         });
     }
 }
-
+//fonction pour recalculer les quantités et prix totaux du panier après des modifications
 function refreshQuantityPrice (){
 
     let cart = getCart();
@@ -161,8 +175,10 @@ function refreshQuantityPrice (){
     let refreshPrice = 0;
     let refreshQuantity = 0;
 
+    //condition si le panier n'est pas vide
     if (cart.length > 0) {
         for (const product of cart) {
+            //appel de l'API pour retrouver le prix et la quantité de produit car pas la portée des précédentes variables
             fetch("http://localhost:3000/api/products/"  + product._id)
 
                 .then((res) => res.json())
@@ -172,6 +188,7 @@ function refreshQuantityPrice (){
                 refreshPrice += sofa.price * product.amount;
                 refreshQuantity += product.amount;
 
+                //affichage des nouvelles valeurs
                 const refreshQuantityElement = document.getElementById("totalQuantity");
                 const refreshPriceElement = document.getElementById("totalPrice");
 
@@ -182,6 +199,7 @@ function refreshQuantityPrice (){
             })
         }
     } else {
+        //sinon fonction de panier vide
         displayCartIsEmpty ();
     }  
 }
