@@ -59,6 +59,7 @@ function addToCart(productId, color, amount) {
   //vérifier si le produit existe déjà avec l'id et la couleur identiques
   for (let i = 0; i < cart.lenght; i ++) {
     const product = cart[i];
+    //bouclier pour vérifier si le produit existant correspond aux informations (couleur & id)
     if (product._id == productId && product.color == color) {
       productFound = true;
       productIndex = i;
@@ -74,6 +75,7 @@ function addToCart(productId, color, amount) {
       color: color,
       amount: amount,
     }
+    //envoi du produit
     cart.push(newProduct);
     console.log(newProduct);
     console.log("clic effectué");
@@ -82,6 +84,7 @@ function addToCart(productId, color, amount) {
   saveCart(cart);
 }
 
+//définition du choix du produit et écoute de l'ajout
 let productChoice = document.getElementById("addToCart");
       productChoice.addEventListener("click", () => {
     let colorChoice = document.getElementById("colors");
@@ -96,6 +99,7 @@ let productChoice = document.getElementById("addToCart");
     ) {
       alert("Pour valider votre choix, veuillez renseigner une couleur et/ou une quantité valide");
     } else {
+      //envoi du produit au panier
       addToCart(productId, colorChoice.value, parseInt(quantityChoice.value));
       console.log("clic effectué");
       document.getElementById("addToCart").textContent = "Et Hop!";

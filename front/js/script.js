@@ -23,7 +23,7 @@ function displayProducts(productsCollection) {
   const zoneArticle = document.getElementById("items");
   // boucle avec indice "article"
   for (const product of productsCollection) {
-
+    //création des éléments par la modification du DOM en créant des enfants et petits enfants... à l'article
     const productLink = document.createElement('a');
     productLink.setAttribute('href',"./product.html?_id=" + product._id);
     zoneArticle.appendChild(productLink);
