@@ -127,6 +127,7 @@ if (productLocalStorage.length == 0) {
                 //on écoute l'action sur le bouton
                 productDelete.addEventListener("click", (e) => {
                     let cart = getCart();
+                    //signifie pas trouvé
                     let index = -1;
                     for(let i = 0; i < cart.length; i++){
                         const product = cart[i];
@@ -207,11 +208,11 @@ function refreshQuantityPrice (){
 //GESTION DU FORMULAIRE
 document.addEventListener("DOMContentLoaded", function() {
     let form = document.querySelector(".cart__order__form");
-
+//instauration des règles de saisie du formulaire
     const addressReg = new RegExp("^[0-9]{1,3}(?:(?:[,. ]){1}[-a-zA-Zàâäéèêëïîôöùûüç]+)+");
     const emailReg = new RegExp('^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$');
     const charReg = new RegExp("^[a-zA-Z ,.'-]+$");
-
+//
     const validFirstName = function(areaFirstName) {
         let firstNameErrorMsg = areaFirstName.nextElementSibling;
 
@@ -324,9 +325,8 @@ document.addEventListener("DOMContentLoaded", function() {
         .then((data) => {
             console.log(data);
             // localStorage.removeItem("product");
-            localStorage.setItem("orderId", data.orderId);
 
-            window.location.href = "confirmation.html"; //redirection vers la page confirmation
+            window.location.href = "confirmation.html?order_id=" + data.orderId; //redirection vers la page confirmation
         })
         .catch((err) => {
             alert ("Problème avec fetch : " + err.message);
