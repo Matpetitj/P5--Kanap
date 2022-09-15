@@ -212,7 +212,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const addressReg = new RegExp("^[0-9]{1,3}(?:(?:[,. ]){1}[-a-zA-Zàâäéèêëïîôöùûüç]+)+");
     const emailReg = new RegExp('^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-z]{2,10}$');
     const charReg = new RegExp("^[a-zA-Z ,.'-]+$");
-//
+//Différente manière de déclarer des fonctions, ici pour le fonctionnement des champs du formulaire client
     const validFirstName = function(areaFirstName) {
         let firstNameErrorMsg = areaFirstName.nextElementSibling;
 
@@ -283,23 +283,25 @@ document.addEventListener("DOMContentLoaded", function() {
         validEmail(this);
     });
 
+    //écouter du bouton commander pour valider la commande et submit le formulaire
     form.addEventListener("submit", (event) => {
         const cart = getCart();
 
         event.preventDefault();
-    
+        //ici on récupère les données du formulaire client pour l'objet qui va suivre "order"
         let inputName = document.getElementById('firstName');
         let inputLastName = document.getElementById('lastName');
         let inputAdress = document.getElementById('address');
         let inputCity = document.getElementById('city');
         let inputMail = document.getElementById('email');
 
+        //construction d'un array
         let productsId = [];
         for (let i = 0; i < cart.length ; i++) {
             productsId.push(cart[i]._id);
         }
         console.log(productsId);
-
+        //création d'un objet pour récupérer les données des clients
         const order = {
             contact : {
                 firstName: inputName.value,
@@ -310,8 +312,8 @@ document.addEventListener("DOMContentLoaded", function() {
             },
             products: productsId,
         } 
-
-        const options = {
+        //écriture de l'objet
+        const send = {
             method: 'POST',
             body: JSON.stringify(order),
             headers: {
@@ -320,7 +322,7 @@ document.addEventListener("DOMContentLoaded", function() {
             },
         };
 
-        fetch("http://localhost:3000/api/products/order", options)
+        fetch("http://localhost:3000/api/products/order", send)
         .then((response) => response.json())
         .then((data) => {
             console.log(data);
