@@ -3,7 +3,7 @@
 fetch("http://localhost:3000/api/products")
 
 .then((res) => res.json())
-  // on nomme ce que l'on recoit "receiveobject"
+  // on nomme ce que l'on recoit "receiveobject" / .then promise
   .then((listSofa) => {
     // info en console
     console.table(listSofa);
