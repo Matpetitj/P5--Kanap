@@ -15,6 +15,9 @@ fetch("http://localhost:3000/api/products/" + productId)
     insertProductIntoPage(sofa);
   })
 
+  //Promesse en parallèle, asynchrone
+  //await attend la réponse pour se lancer
+
   //Ajout des informations des produits
 
   function insertProductIntoPage(product) {
@@ -91,11 +94,8 @@ let productChoice = document.getElementById("addToCart");
     let quantityChoice = document.getElementById("quantity");
     if (
     //valeurs dynamiques (non définies au départ, il faut cliquer et changer la valeur pour accéder à la logique)
-      quantityChoice.value < 1 || 
-      quantityChoice.value > 100 ||
-      quantityChoice.value === undefined && 
-      colorChoice.value === "" || 
-      colorChoice.value === undefined
+      quantityChoice.value < 1 || quantityChoice.value > 100 || quantityChoice.value === undefined && 
+      colorChoice.value === "" || colorChoice.value === undefined
     ) {
       alert("Pour valider votre choix, veuillez renseigner une couleur et/ou une quantité valide");
     } else {
