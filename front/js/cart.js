@@ -312,6 +312,7 @@ document.addEventListener("DOMContentLoaded", function() {
             },
             products: productsId,
         } 
+        console.log(order);
         //écriture de l'objet
         const send = {
             method: 'POST',
