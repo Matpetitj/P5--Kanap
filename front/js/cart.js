@@ -275,7 +275,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (emailReg.test(areaEmail.value)) {
             emailErrorMsg.textContent = '';
         } else {
-            emailErrorMsg.textContent = 'Veuillez renseigner un email valide email.';
+            emailErrorMsg.textContent = 'Veuillez renseigner un email valide.';
         }
     };
 
