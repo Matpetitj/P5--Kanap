@@ -11,6 +11,6 @@ function getCart() {
   //sauvegarder le panier dans le localStorage
     function saveCart(products) {
     localStorage.setItem("product",JSON.stringify(products));
-    console.log(products);
+    // console.log(products);
   }
   

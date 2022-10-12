@@ -100,7 +100,7 @@ if (productLocalStorage.length == 0) {
                         if(cart[i]._id === productId && cart[i].color === color){
                             //passage en chiffre
                             cart[i].amount = parseInt(productQuantity.value);
-                            console.log(productId, color, parseInt(productQuantity.value), cart[i]);
+                            // console.log(productId, color, parseInt(productQuantity.value), cart[i]);
                             //sauvegarde dans le localStorage
                             saveCart(cart);
                             //utilisation de la fonction refresh
@@ -162,7 +162,7 @@ if (productLocalStorage.length == 0) {
 
                 finalQuantityElement.textContent = totalQuantity;
                 finalPriceElement.textContent = totalPrice;
-                console.log("mise à jour des prix", totalPrice);
+                // console.log("mise à jour des prix", totalPrice);
             }
             totalPriceAndQuandity();
         });
@@ -300,7 +300,7 @@ document.addEventListener("DOMContentLoaded", function() {
         for (let i = 0; i < cart.length ; i++) {
             productsId.push(cart[i]._id);
         }
-        console.log(productsId);
+        // console.log(productsId);
         //création d'un objet pour récupérer les données des clients
         const order = {
             contact : {
@@ -312,7 +312,7 @@ document.addEventListener("DOMContentLoaded", function() {
             },
             products: productsId,
         } 
-        console.log(order);
+
         //écriture de l'objet
         const send = {
             method: 'POST',
@@ -327,8 +327,6 @@ document.addEventListener("DOMContentLoaded", function() {
         .then((response) => response.json())
         .then((data) => {
             console.log(data);
-            // localStorage.removeItem("product");
-
             window.location.href = "confirmation.html?order_id=" + data.orderId; //redirection vers la page confirmation
         })
         .catch((err) => {

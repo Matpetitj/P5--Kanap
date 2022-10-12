@@ -13,7 +13,7 @@ fetch("http://localhost:3000/api/products")
   // Si erreur, renvoie d'un texte erreur 404.
   .catch((err) => {
     document.querySelector(".titles").innerHTML = "<h1>erreur 404</h1>";
-    console.log("erreur 404, sur ressource api:" + err);
+    // console.log("erreur 404, sur ressource api:" + err);
   });
 
 // Affichage de l'API sur l'index
