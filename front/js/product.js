@@ -48,7 +48,7 @@ fetch("http://localhost:3000/api/products/" + productId)
   //Ajout du produit au panier
 
 function addToCart(productId, color, amount) {
-  // console.log(productId, color, amount);
+  //console.log(productId, color, amount);
   //récupérer le panier
   const cart = getCart();
   let productFound = false;
@@ -63,11 +63,10 @@ function addToCart(productId, color, amount) {
       productIndex = i;
     }
   }
-  //si il existe, + les deux quantités (avant maintenant)
-  // console.log(productFound, productIndex);
-  if (productFound == true) {
+  //si il existe, additionne les deux quantités (avant maintenant)
+  //console.log(productFound, productIndex);
+  if(productFound == true){
     cart[productIndex].amount += amount;
-  //sinon, insérer le produit dans le panier
   } else { 
     let newProduct = {
       _id: productId,
@@ -90,10 +89,8 @@ let productChoice = document.getElementById("addToCart");
     let quantityChoice = document.getElementById("quantity");
     // console.log(colorChoice);
     // console.log(quantityChoice);
-    if (
-    //valeurs dynamiques (non définies au départ, il faut cliquer et changer la valeur pour accéder à la logique)
-      quantityChoice.value < 1 || quantityChoice.value > 100 || quantityChoice.value === undefined || colorChoice.value === "" || colorChoice.value === undefined
-    ) {
+    if (quantityChoice.value < 1 || quantityChoice.value > 100 || quantityChoice.value === undefined || colorChoice.value === "" || colorChoice.value === undefined) {
+      //valeurs dynamiques (non définies au départ, il faut cliquer et changer la valeur pour accéder à la logique)
       alert("Pour valider votre choix, veuillez renseigner une couleur et/ou une quantité valide");
     } else {
       //envoi du produit au panier
