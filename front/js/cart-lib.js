@@ -10,10 +10,11 @@ function getCart() {
   
   //sauvegarder le panier dans le localStorage
     function saveCart(products) {
+      const cart = getCart();
       for(const product of products){
         if(product.amount > 100){
           alert("Impossible d'ajouter plus de produits de ce type");
-          cart.splice(product);
+          product.amount = 100;
         }
       }
       localStorage.setItem("product",JSON.stringify(products));

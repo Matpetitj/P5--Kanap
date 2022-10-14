@@ -63,7 +63,7 @@ function addToCart(productId, color, amount) {
       productIndex = i;
     }
   }
-  //si il existe, additionne les deux quantités (avant maintenant)
+  //si il existe, il additionne les deux quantités (avant + maintenant)
   //console.log(productFound, productIndex);
   if(productFound == true){
     cart[productIndex].amount += amount;
